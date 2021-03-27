@@ -98,9 +98,9 @@ public class chat extends JFrame
     	
     	public void sendTextToFile(String text) throws FileNotFoundException{
         	try(
-        		FileWriter file = new FileWriter("chat_record.txt");
+        		FileWriter file = new FileWriter("chat_record.txt",true);
         			PrintWriter print = new PrintWriter(new BufferedWriter(file));){
-        		print.println("Heart:" + text);
+        		print.println("Heart:" + text+"\r\n");
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -163,9 +163,9 @@ public class chat extends JFrame
     	}
     	
     	public void sendTextToFile(String text) throws FileNotFoundException{
-        	try(FileWriter file = new FileWriter("chat_record.txt");
+        	try(FileWriter file = new FileWriter("chat_record.txt",true);
         			PrintWriter p = new PrintWriter(new BufferedWriter(file));){
-        		p.println("Smile: "+text+"\n");
+        		p.println("Smile: "+text+"\t\n");
             }catch(Exception e){
                 e.printStackTrace();
             }
