@@ -32,9 +32,6 @@ public class chat extends JFrame
         chatarea.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
         chatarea.setLayout(new GridLayout(1,10));
         
-        add(textarea,BorderLayout.NORTH);
-    	add(chatarea,BorderLayout.SOUTH);
-        
         text = new JTextField();
         text.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
         
@@ -57,6 +54,12 @@ public class chat extends JFrame
         textarea.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
 //        textarea.setBackground(Color.WHITE);
         textarea.setVisible(true);
+        
+        JScrollPane sp = new JScrollPane(textarea);
+        sp.setBorder(BorderFactory.createEmptyBorder());
+        
+        add(sp, BorderLayout.CENTER);
+    	add(chatarea, BorderLayout.SOUTH);
     }
 
     private class Button1Handler implements ActionListener{
@@ -120,6 +123,7 @@ public class chat extends JFrame
                 textarea.setLayout(new BorderLayout());
                 textarea.add(vertical, BorderLayout.PAGE_START);
                 //¿é¤J®ØªÅ¥Õ
+                text.setText("");
             }catch(Exception e){
                 System.out.println(e);
             }
