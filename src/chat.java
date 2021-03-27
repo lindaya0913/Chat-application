@@ -5,23 +5,25 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-public class chat extends JFrame
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+public class chat extends JFrame implements ActionListener
 {
 	JPanel chatarea;
 	JTextField text;
 	JButton receive;
 	JButton send;
 	
-	TextArea textarea=new TextArea();
+	static JTextArea textarea = new JTextArea();
 	static Box vertical = Box.createVerticalBox();
-	static DataInputStream din;
-    static DataOutputStream dout;
     
     public chat() 
     {
-    	super("²á¤Ñ«Ç");
+    	super("Chatroom");
     	this.setSize(300,400);
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	this.setLayout(new BorderLayout());
@@ -29,7 +31,7 @@ public class chat extends JFrame
         
         chatarea = new JPanel();
         chatarea.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
-        chatarea.setLayout(new GridLayout(1,6));
+        chatarea.setLayout(new GridLayout(1,10));
         
         add(textarea,BorderLayout.CENTER);
     	add(chatarea,BorderLayout.SOUTH);
@@ -41,8 +43,7 @@ public class chat extends JFrame
         send.setBackground(new Color(7, 94, 84));
         send.setForeground(Color.WHITE);
         send.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
-//        send.addActionListener(this);
-
+        send.addActionListener(this);
         
         receive = new JButton("Receive");
         receive.setBackground(new Color(7, 94, 84));
@@ -53,18 +54,22 @@ public class chat extends JFrame
         chatarea.add(receive);
         chatarea.add(text);
         chatarea.add(send);
-
-//        frame.getContentPane().setBackground(Color.WHITE);
-//        frame.setLayout(null);
-//        frame.setSize(450, 700);
-//        frame.setLocation(1100, 200); 
-//        frame.setUndecorated(true);
-//        frame.setVisible(true);
+   
+        textarea.setEditable(false);
+        textarea.setLineWrap(true);
+        textarea.setWrapStyleWord(true);
+        
+        textarea.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
         textarea.setBackground(Color.WHITE);
         textarea.setVisible(true);
     }
-    private class TextArea extends JPanel
-    {
-    	
+    public void actionPerformed(ActionEvent ae){
+    	try{
+    		String out = text.getText();
+    		textarea.setText(textarea.getText()+"\n"+out);
+        	text.setText("");
+    	}catch(Exception e){
+            System.out.println(e);
+        }
     }
 }

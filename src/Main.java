@@ -4,7 +4,7 @@ public class Main {
     {
     	chat gui=new chat();
     	gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	gui.setSize(300,400);
+    	gui.setSize(400,600);
     	gui.setVisible(true);
 	}
 }
