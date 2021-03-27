@@ -27,10 +27,12 @@ public class chat extends JFrame
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	this.setLayout(new BorderLayout());
     	this.setResizable(false);
+    	
         
         chatarea = new JPanel();
         chatarea.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
-        chatarea.setLayout(new GridLayout(1,10));
+        chatarea.setLayout(
+        		new BoxLayout(chatarea, BoxLayout.X_AXIS));
         
         text = new JTextField();
         text.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
@@ -48,8 +50,11 @@ public class chat extends JFrame
         receive.addActionListener(new Button2Handler());
 
         chatarea.add(receive);
+        chatarea.add(Box.createHorizontalStrut(2));
         chatarea.add(text);
+        chatarea.add(Box.createHorizontalStrut(6));
         chatarea.add(send);
+        chatarea.add(Box.createHorizontalStrut(2));
         
         textarea.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
 //        textarea.setBackground(Color.WHITE);
@@ -65,9 +70,15 @@ public class chat extends JFrame
     private class Button1Handler implements ActionListener{
     	public void actionPerformed(ActionEvent ae){
         	try{
-        		String out = text.getText();
+            	String out = text.getText();
+            	
+            	//image heart
+        		ImageIcon heart = new ImageIcon(ClassLoader.getSystemResource("icon/heart.png"));
+            	Image heart2 = heart.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            	ImageIcon heart3 = new ImageIcon(heart2);
+            	
                 //文字+時間框
-                JPanel chatpanel = formatLabel(out);
+                JPanel chatpanel = formatLabel(out, heart3);
 
                 //文字置右
                 JPanel right = new JPanel(new BorderLayout());
@@ -83,12 +94,15 @@ public class chat extends JFrame
                 System.out.println(e);
             }
     	}
-    	public JPanel formatLabel(String out){
+    	public JPanel formatLabel(String out, Icon heart){
         	JPanel chatbox = new JPanel();
         	chatbox.setLayout(new BoxLayout(chatbox, BoxLayout.Y_AXIS));//文字下接時間
             
         	//文字
-            JLabel wordlabel = new JLabel("<html><p style = \"width : 120px\">"+out+"</p></html>");
+            JLabel wordlabel = new JLabel();
+            wordlabel.setText("<html><p style = \"width : 120px\">"+out+"</p></html>");
+            wordlabel.setIcon(heart);
+            wordlabel.setHorizontalTextPosition(JLabel.LEFT);
             wordlabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
             wordlabel.setBackground(new Color(37, 211, 102));
             wordlabel.setOpaque(true);
@@ -111,8 +125,14 @@ public class chat extends JFrame
     	public void actionPerformed(ActionEvent ae){
         	try{
         		String out = text.getText();
+        		
+        		//image smile
+        		ImageIcon smile = new ImageIcon(ClassLoader.getSystemResource("icon/smile.png"));
+            	Image smile2 = smile.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            	ImageIcon smile3 = new ImageIcon(smile2);
+            	
                 //文字+時間框
-                JPanel chatpanel = formatLabel(out);
+                JPanel chatpanel = formatLabel(out, smile3);
 
                 //文字置左
                 JPanel left = new JPanel(new BorderLayout());
@@ -128,12 +148,14 @@ public class chat extends JFrame
                 System.out.println(e);
             }
     	}
-    	public JPanel formatLabel(String out){
+    	public JPanel formatLabel(String out, Icon smile){
         	JPanel chatbox = new JPanel();
         	chatbox.setLayout(new BoxLayout(chatbox, BoxLayout.Y_AXIS));//文字下接時間
             
         	//文字
-            JLabel wordlabel = new JLabel("<html><p style = \"width : 120px\">"+out+"</p></html>");
+        	JLabel wordlabel = new JLabel();
+            wordlabel.setText("<html><p style = \"width : 120px\">"+out+"</p></html>");
+            wordlabel.setIcon(smile);
             wordlabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
             wordlabel.setBackground(new Color(37, 211, 102));
             wordlabel.setOpaque(true);
