@@ -1,10 +1,10 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -71,6 +71,7 @@ public class chat extends JFrame
     	public void actionPerformed(ActionEvent ae){
         	try{
             	String out = text.getText();
+            	sendTextToFile(out);
             	
             	//image heart
         		ImageIcon heart = new ImageIcon(ClassLoader.getSystemResource("icon/heart.png"));
@@ -94,6 +95,17 @@ public class chat extends JFrame
                 System.out.println(e);
             }
     	}
+    	
+    	public void sendTextToFile(String text) throws FileNotFoundException{
+        	try(
+        		FileWriter file = new FileWriter("chat_record.txt");
+        			PrintWriter print = new PrintWriter(new BufferedWriter(file));){
+        		print.println("Heart:" + text);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+    	}
+    	
     	public JPanel formatLabel(String out, Icon heart){
         	JPanel chatbox = new JPanel();
         	chatbox.setLayout(new BoxLayout(chatbox, BoxLayout.Y_AXIS));//文字下接時間
@@ -125,7 +137,8 @@ public class chat extends JFrame
     	public void actionPerformed(ActionEvent ae){
         	try{
         		String out = text.getText();
-        		
+        		sendTextToFile(out);
+     
         		//image smile
         		ImageIcon smile = new ImageIcon(ClassLoader.getSystemResource("icon/smile.png"));
             	Image smile2 = smile.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
@@ -148,6 +161,16 @@ public class chat extends JFrame
                 System.out.println(e);
             }
     	}
+    	
+    	public void sendTextToFile(String text) throws FileNotFoundException{
+        	try(FileWriter file = new FileWriter("chat_record.txt");
+        			PrintWriter p = new PrintWriter(new BufferedWriter(file));){
+        		p.println("Smile: "+text+"\n");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+    	}
+    	
     	public JPanel formatLabel(String out, Icon smile){
         	JPanel chatbox = new JPanel();
         	chatbox.setLayout(new BoxLayout(chatbox, BoxLayout.Y_AXIS));//文字下接時間
