@@ -11,7 +11,7 @@ import java.util.Calendar;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class chat extends JFrame implements ActionListener
+public class chat extends JFrame
 {
 	JPanel chatarea;
 	JTextField text;
@@ -42,61 +42,108 @@ public class chat extends JFrame implements ActionListener
         send.setBackground(new Color(7, 94, 84));
         send.setForeground(Color.WHITE);
         send.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
-        send.addActionListener(this);
+        send.addActionListener(new Button1Handler());
         
         receive = new JButton("Receive");
         receive.setBackground(new Color(7, 94, 84));
         receive.setForeground(Color.WHITE);
         receive.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
-//        receive.addActionListener(this);
+        receive.addActionListener(new Button2Handler());
 
         chatarea.add(receive);
         chatarea.add(text);
         chatarea.add(send);
         
         textarea.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
-        textarea.setBackground(Color.WHITE);
+//        textarea.setBackground(Color.WHITE);
         textarea.setVisible(true);
     }
-    public void actionPerformed(ActionEvent ae){
-    	try{
-    		String out = text.getText();
-            //文字+時間框
-            JPanel chatpanel = formatLabel(out);
 
-            //文字置右
-            JPanel right = new JPanel(new BorderLayout());
-            right.add(chatpanel, BorderLayout.LINE_END);
-            vertical.add(right);
-            vertical.add(Box.createVerticalStrut(15));
+    private class Button1Handler implements ActionListener{
+    	public void actionPerformed(ActionEvent ae){
+        	try{
+        		String out = text.getText();
+                //文字+時間框
+                JPanel chatpanel = formatLabel(out);
 
-            textarea.setLayout(new BorderLayout());
-            textarea.add(vertical, BorderLayout.PAGE_START);
-            //輸入框空白
-            text.setText("");
-        }catch(Exception e){
-            System.out.println(e);
+                //文字置右
+                JPanel right = new JPanel(new BorderLayout());
+                right.add(chatpanel, BorderLayout.LINE_END);
+                vertical.add(right);
+                vertical.add(Box.createVerticalStrut(15));
+
+                textarea.setLayout(new BorderLayout());
+                textarea.add(vertical, BorderLayout.PAGE_START);
+                //輸入框空白
+                text.setText("");
+            }catch(Exception e){
+                System.out.println(e);
+            }
+    	}
+    	public JPanel formatLabel(String out){
+        	JPanel chatbox = new JPanel();
+        	chatbox.setLayout(new BoxLayout(chatbox, BoxLayout.Y_AXIS));//文字下接時間
+            
+        	//文字
+            JLabel wordlabel = new JLabel("<html><p style = \"width : 120px\">"+out+"</p></html>");
+            wordlabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+            wordlabel.setBackground(new Color(37, 211, 102));
+            wordlabel.setOpaque(true);
+            wordlabel.setBorder(new EmptyBorder(5,5,5,5));
+            
+            //時間
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            JLabel timelabel = new JLabel();
+            timelabel.setText(sdf.format(cal.getTime()));
+            
+            chatbox.add(wordlabel);
+            chatbox.add(timelabel);
+            return chatbox;
         }
     }
-    public static JPanel formatLabel(String out){
-    	JPanel chatbox = new JPanel();
-    	chatbox.setLayout(new BoxLayout(chatbox, BoxLayout.Y_AXIS));//文字下接時間
-        
-    	//文字
-        JLabel wordlabel = new JLabel("<html><p style = \"width : 120px\">"+out+"</p></html>");
-        wordlabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        wordlabel.setBackground(new Color(37, 211, 102));
-        wordlabel.setOpaque(true);
-        wordlabel.setBorder(new EmptyBorder(5,5,5,5));
-        
-        //時間
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        JLabel timelabel = new JLabel();
-        timelabel.setText(sdf.format(cal.getTime()));
-        
-        chatbox.add(wordlabel);
-        chatbox.add(timelabel);
-        return chatbox;
+
+    //Receive
+    private class Button2Handler implements ActionListener{
+    	public void actionPerformed(ActionEvent ae){
+        	try{
+        		String out = text.getText();
+                //文字+時間框
+                JPanel chatpanel = formatLabel(out);
+
+                //文字置左
+                JPanel left = new JPanel(new BorderLayout());
+                left.add(chatpanel, BorderLayout.LINE_START);
+                vertical.add(left);
+                vertical.add(Box.createVerticalStrut(15));
+
+                textarea.setLayout(new BorderLayout());
+                textarea.add(vertical, BorderLayout.PAGE_START);
+                //輸入框空白
+            }catch(Exception e){
+                System.out.println(e);
+            }
+    	}
+    	public JPanel formatLabel(String out){
+        	JPanel chatbox = new JPanel();
+        	chatbox.setLayout(new BoxLayout(chatbox, BoxLayout.Y_AXIS));//文字下接時間
+            
+        	//文字
+            JLabel wordlabel = new JLabel("<html><p style = \"width : 120px\">"+out+"</p></html>");
+            wordlabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+            wordlabel.setBackground(new Color(37, 211, 102));
+            wordlabel.setOpaque(true);
+            wordlabel.setBorder(new EmptyBorder(5,5,5,5));
+            
+            //時間
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            JLabel timelabel = new JLabel();
+            timelabel.setText(sdf.format(cal.getTime()));
+            
+            chatbox.add(wordlabel);
+            chatbox.add(timelabel);
+            return chatbox;
+        }
     }
 }
