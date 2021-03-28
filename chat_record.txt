@@ -1,20 +1,20 @@
-Heart:hello
+Heart:Hello!
 
-Heart:hello~
+Smile: Hello~	
 
-Heart:what's your name?
+Heart:What's your name?
 
-Smile: smile	
+Smile: Smile	
 
 Smile: u?	
 
-Heart:ur heart!
+Heart:your heart!
 
-Heart:hahahahahahahahahahahahahahaha
+Heart:hahahahahahahahahahahahahahahahahaha
 
-Smile: wow	
+Smile: WOW!!	
 
-Smile: u r so funny	
+Smile: u r so funny!	
 
-Smile: hahahahahahahahahahahahahahahahaha	
+Smile: hahahahahahahahahahahahahahahaha	
 
