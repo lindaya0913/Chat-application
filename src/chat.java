@@ -71,7 +71,6 @@ public class chat extends JFrame
     	public void actionPerformed(ActionEvent ae){
         	try{
             	String out = text.getText();
-            	sendTextToFile(out);
             	
             	//image heart
         		ImageIcon heart = new ImageIcon(ClassLoader.getSystemResource("icon/heart.png"));
@@ -96,11 +95,11 @@ public class chat extends JFrame
             }
     	}
     	
-    	public void sendTextToFile(String text) throws FileNotFoundException{
+    	public void sendTextToFile(String text, String time){
         	try(
         		FileWriter file = new FileWriter("chat_record.txt",true);
         			PrintWriter print = new PrintWriter(new BufferedWriter(file));){
-        		print.println("Heart:" + text+"\r\n");
+        		print.println("Heart: " + text + " " + time +"\r\n");
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -126,6 +125,8 @@ public class chat extends JFrame
             JLabel timelabel = new JLabel();
             timelabel.setText(sdf.format(cal.getTime()));
             
+            sendTextToFile(out, sdf.format(cal.getTime()));
+            
             chatbox.add(wordlabel);
             chatbox.add(timelabel);
             return chatbox;
@@ -137,7 +138,6 @@ public class chat extends JFrame
     	public void actionPerformed(ActionEvent ae){
         	try{
         		String out = text.getText();
-        		sendTextToFile(out);
      
         		//image smile
         		ImageIcon smile = new ImageIcon(ClassLoader.getSystemResource("icon/smile.png"));
@@ -162,10 +162,10 @@ public class chat extends JFrame
             }
     	}
     	
-    	public void sendTextToFile(String text) throws FileNotFoundException{
+    	public void sendTextToFile(String text, String time){
         	try(FileWriter file = new FileWriter("chat_record.txt",true);
         			PrintWriter p = new PrintWriter(new BufferedWriter(file));){
-        		p.println("Smile: "+text+"\t\n");
+        		p.println("Smile: "+ text + " " + time +"\r\n");
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -189,6 +189,8 @@ public class chat extends JFrame
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             JLabel timelabel = new JLabel();
             timelabel.setText(sdf.format(cal.getTime()));
+            
+            sendTextToFile(out, sdf.format(cal.getTime()));
             
             chatbox.add(wordlabel);
             chatbox.add(timelabel);
