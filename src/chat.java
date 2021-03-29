@@ -88,6 +88,8 @@ public class chat extends JFrame
 
                 textarea.setLayout(new BorderLayout());
                 textarea.add(vertical, BorderLayout.PAGE_START);
+                textarea.revalidate();
+                
                 //輸入框空白
                 text.setText("");
             }catch(Exception e){
@@ -146,7 +148,7 @@ public class chat extends JFrame
             	
                 //文字+時間框
                 JPanel chatpanel = formatLabel(out, smile3);
-
+                
                 //文字置左
                 JPanel left = new JPanel(new BorderLayout());
                 left.add(chatpanel, BorderLayout.LINE_START);
@@ -155,6 +157,7 @@ public class chat extends JFrame
 
                 textarea.setLayout(new BorderLayout());
                 textarea.add(vertical, BorderLayout.PAGE_START);
+                textarea.revalidate();
                 //輸入框空白
                 text.setText("");
             }catch(Exception e){
@@ -194,6 +197,7 @@ public class chat extends JFrame
             
             chatbox.add(wordlabel);
             chatbox.add(timelabel);
+
             return chatbox;
         }
     }
